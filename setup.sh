@@ -101,11 +101,6 @@ echo ""
 echo "Making sure that apt-get is updated and wget is installed..."
 echo ""
 
-apt-get update > /dev/null
-
-if [ `sudo dpkg-query -l | grep wget | wc -l` = 0 ] ; then
-  apt-get install wget -y  > /dev/null
-fi
 
 echo "What type of connection will you be using this VPN server on?"
 echo "Enter the corresponding number for:"
@@ -151,36 +146,6 @@ echo "The IP address that will be used in the config is $IPADDRESS"
 echo ""
 echo "============================================================"
 echo ""
-
-echo "Installing necessary dependencies..."
-
-apt-get install libnss3-dev libnspr4-dev pkg-config libpam0g-dev libcap-ng-dev libcap-ng-utils libselinux1-dev libcurl4-nss-dev libgmp3-dev flex bison gcc make libunbound-dev libnss3-tools -y  > /dev/null
-
-if [ "$?" = "1" ]
-then
-  echo "An unexpected error occured!"
-  exit 0
-fi
-
-echo "Installing XL2TPD..."
-apt-get install xl2tpd -y > /dev/null
-
-if [ "$?" = "1" ]
-then
-  echo "An unexpected error occured!"
-  exit 0
-fi
-
-# Compile and install Libreswan
-mkdir -p /opt/src
-cd /opt/src
-echo "Downloading LibreSwan's source..."
-wget -qO- https://download.libreswan.org/libreswan-3.13.tar.gz | tar xvz > /dev/null
-cd libreswan-3.13
-echo "Compiling LibreSwan..."
-make programs > /dev/null
-echo "Installing LibreSwan..."
-make install > /dev/null
 
 echo "Preparing various configuration files..."
 
