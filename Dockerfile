@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 MAINTAINER Matheus Candido <matheus@mcassiano.com>
 
 RUN apt-get update
-RUN apt-get install -y wget
+RUN apt-get install -y wget iptables
 RUN wget https://raw.github.com/philplckthun/setup-simple-ipsec-l2tp-vpn/master/setup.sh
 RUN mkdir /root/ipsec
 
